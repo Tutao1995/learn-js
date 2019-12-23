@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reduce</title>
+</head>
+<body>
+    <div class="sum">
+
+    </div>
+    <div class="sum2">
+
+    </div>
+
+</body>
+<script>
+    //reduce  学习
+    //原理：它的功能就是将一个数组的内容聚合成单个值。
+    //参数  分别 callback，以及一个初始值
+    //callback 参数 分别为 累计值，当前项，当前索引，原数组
+    //初始值：作为第一次调用 callback函数时的第一个参数的值。 如果没有提供初始值，则将使用数组中的第一个元素。 在没有初始值的空数组上调用 reduce 将报错。
+    //用法一   数组求和
+    let array = [1,2,4,5,5];
+    let sum = array.reduce( (sum, current) => {
+        return sum + current
+    },0);
+    let sum2 = array.reduce( (sum, current, index, array) => {
+        return sum + current
+    });
+    document.querySelector('.sum').innerHTML = sum;
+    document.querySelector('.sum2').innerHTML = sum2;
+
+    //用法二  组合多个数组方法
+
+    const wizards = [
+        {
+            name: 'Harry Potter',
+            house: 'Gryfindor'
+        },
+        {
+            name: 'Cedric Diggory',
+            house: 'Hufflepuff'
+        },
+        {
+            name: 'Tonks',
+            house: 'Hufflepuff'
+        },
+        {
+            name: 'Ronald Weasley',
+            house: 'Gryfindor'
+        },
+        {
+            name: 'Hermione Granger',
+            house: 'Gryfindor'
+        }
+    ];
+    let getHouseHufflepuff = wizards.reduce( (sum,current) => {
+        if(current.house === 'Hufflepuff') {
+            sum.push(current.name)
+        }
+        return sum;
+    },[]);
+    console.log(getHouseHufflepuff);
+    //用法三   从数组生成 HTML 标签
+    let getHouseHufflepuffHtml = wizards.reduce( (sum,current) => {
+        if(current.house === 'Hufflepuff') {
+            sum += '<li>'+ current.name +'</li>'
+        }
+        return sum;
+    },'');
+    let ulDom = '<ul>' + getHouseHufflepuffHtml + '</ul>';
+    document.body.innerHTML = ulDom;
+    // 用法四 数组元素分组
+    
+</script>
+</html>
