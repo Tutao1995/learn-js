@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归</title>
+</head>
+<body>
+    <div id="mybox">111</div>
+</body>
+<script>
+    //递归就是自己调用自己
+    
+    //Dom Tree
+    //用递归实现一个查DOM的功能document.getElementById。
+    // documuent 为根节点，先从根节点向下找，   深度优先遍历
+    function getElementById(node,id){
+        if(!node) return null;
+        if(node.id === id) return node;
+        for(let i = 0; i < node.childNodes.length; i++ ){
+            let found = getElementById(node.childNodes[i],id);
+            if(found) return found;
+        }
+        return null
+    }
+    //非递归
+    function getElementByIdNot(node,id){
+        //遍历所有的node
+        while(node){
+            if(node.id === id) return node;
+            node = nextElement(node)
+        }
+        return null
+    }
+
+    function nextElement(node){
+        if(node.childNodes.length){
+            return node.childNodes[0]
+        }
+        if(node.nextElementSibling){
+            return node.nextElementSibling
+        }
+        while(node.parentNode){
+            if(node.parentNode.nextElementSibling){
+                return node.parentNode.nextElementSibling
+            }
+            node = node.parentNode
+        }
+        return null
+    }
+
+    
+
+
+</script>
+</html>
